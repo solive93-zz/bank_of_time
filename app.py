@@ -1,12 +1,13 @@
 from flask import Flask, jsonify
+from backend.api_routes import api
+from frontend.site_routes import site
 
 
 def webserver():
     app = Flask(__name__)
 
-    @app.route('/')
-    def welcome():
-        return 'Hello, World!'
+    app.register_blueprint(api)
+    app.register_blueprint(site)
 
     return app
 
