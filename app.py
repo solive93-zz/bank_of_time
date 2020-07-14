@@ -1,11 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask
 from backend.api_routes import api
-from frontend.site_routes import site
+from client.site_routes import site
 
 
 def webserver():
     app = Flask(__name__)
-
     app.register_blueprint(api)
     app.register_blueprint(site)
 

@@ -10,14 +10,18 @@ class ServicesRepository(SQLRepositoryInterface):
     cursor = MySQLConnection.mysql_connect()
 
     def fetch_all(self):
-        cursor.execute("SELECT * FROM services")
+        cursor.execute("SELECT * FROM banc_del_temps.services")
 
-    def fetch_one(self, service: Service):
-        query = "SELECT + FROM services WHERE id=%s"
-        cursor.execute(query, id)
+    def fetch_one(self, id: int):
+        query = ("SELECT * FROM banc_del_temps.services WHERE id=%s")
+        data = (id)
+        service = cursor.execute(query, data)
+        return service
 
     def create(self, service: Service):
-        pass
+        query = "INSERT INTO banc_del_temps.services(id, title, body) VALUES(%s, '%s', '%s')"
+        data = (service.id, service.title, service.body)
+        cursor.execute(query, data)
 
     def update(self, service: Service):
         pass
