@@ -1,8 +1,14 @@
-import mysql.connector
+import pymysql
+
 
 class MySQLConnection:
-    @staticmethod
-    def mysql_connect():
-        database = mysql.connector.connect(host="localhost", user="root", passwd="1dos3quatre", database="banc_del_temps")
-        cursor = database.cursor()
-        return cursor
+    def __init__(self):
+        self.connection = pymysql.connect(
+            host="localhost",
+            user="root",
+            password="1dos3quatre",
+            db="banc_del_temps"
+        )
+
+        self.cursor = self.connection.cursor()
+
