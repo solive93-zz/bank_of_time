@@ -1,6 +1,5 @@
 from backend.domain.service import Service
 from backend.infrastructure.repositories.services_repository import ServicesRepository
-import pytest
 
 
 def test_get_by_id_query_is_build_with_the_id_given():
