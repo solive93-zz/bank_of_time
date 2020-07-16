@@ -11,7 +11,7 @@ class SQLRepositoryInterface:
     def create(self, model: Model):
         pass
 
-    def update(self, model: Model, arg1, arg2):
+    def update(self, model: Model, *args):
         pass
 
     def delete(self, model: Model):

@@ -31,13 +31,21 @@ class ServicesRepository(SQLRepositoryInterface, MySQLConnection):
             self.cursor.execute(sql_query)
 
             if 'WHERE' in sql_query:
-                service = self.cursor.fetchone()
-                return Service(service[0], service[1], service[2], service[3])
+                result = self.cursor.fetchone()
+                service = {'id': result[0],
+                        'title': result[1],
+                        'body': result[2],
+                        }
+                return service
 
             services = self.cursor.fetchall()
-            all_services=[]
+            all_services = []
             for service in services:
-                new_service = Service(service[0], service[1], service[2], service[3])
+                new_service = {'id': service[0],
+                               'title': service[1],
+                               'body': service[2],
+
+                               }
                 all_services.append(new_service)
             return all_services
 

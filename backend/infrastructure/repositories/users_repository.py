@@ -1,7 +1,7 @@
 from backend.domain.user import User
 from backend.infrastructure.database.mysql_connection import MySQLConnection
 from backend.infrastructure.repositories.sql_repository_interface import SQLRepositoryInterface
-
+import json
 
 class UsersRepository(SQLRepositoryInterface, MySQLConnection):
 
@@ -31,13 +31,22 @@ class UsersRepository(SQLRepositoryInterface, MySQLConnection):
             self.cursor.execute(sql_query)
 
             if 'WHERE' in sql_query:
-                user = self.cursor.fetchone()
-                return User(user[0], user[1], user[2], user[3])
+                result = self.cursor.fetchone()
+                user = {'id': result[0],
+                        'username': result[1],
+                        'email': result[3],
+                        'password': result[2],
+                        }
+                return user
 
             users = self.cursor.fetchall()
             all_users = []
             for user in users:
-                new_user = User(user[0], user[1], user[2], user[3])
+                new_user = {'id': user[0],
+                            'username': user[1],
+                            'email': user[3],
+                            'password': user[2],
+                            }
                 all_users.append(new_user)
             return all_users
 
